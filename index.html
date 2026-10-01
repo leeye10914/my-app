@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>과방 물품 대여 신청서</title>
+    <meta name="description" content="대학교 과방 물품 대여 신청서 웹사이트" />
+    <meta property="og:title" content="과방 물품 대여 신청서" />
+    <meta property="og:description" content="대학교 과방 물품 대여 신청서 웹사이트" />
+    <meta property="og:type" content="website" />
+    <!-- 외부 스타일시트 분리 -->
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- 전체 신청서는 하나의 흰색 카드 형태로 구성 (최대 너비 600px, 가운데 정렬) -->
+      <main class="card">
+        
+        <!-- ============================================================== -->
+        <!-- 페이지 상단 헤더 -->
+        <!-- ============================================================== -->
+        <header class="header-section">
+          <div class="header-icon" role="img" aria-label="과방 물품">📦</div>
+          <h1 class="header-title">과방 물품 대여 신청</h1>
+          <p class="header-subtitle">필요한 물품을 선택하고 대여 신청서를 작성해주세요.</p>
+          <div class="notice-box">
+            💡 대여한 물품은 반드시 반납 예정일까지 과방에 반납해주세요.
+          </div>
+        </header>
+
+        <!-- ============================================================== -->
+        <!-- 대여 신청서 폼 시작 -->
+        <!-- ============================================================== -->
+        <form id="rentalForm" novalidate>
+          
+          <!-- 1. 이름 (필수, text) -->
+          <div class="form-group">
+            <label for="name" class="form-label">
+              이름<span class="required-star">*</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-input"
+              required
+              placeholder="이름을 입력해주세요"
+            />
+          </div>
+
+          <!-- 2. 학번 (필수, text) -->
+          <div class="form-group">
+            <label for="studentId" class="form-label">
+              학번<span class="required-star">*</span>
+            </label>
+            <input
+              type="text"
+              id="studentId"
+              name="studentId"
+              class="form-input"
+              required
+              placeholder="학번을 입력해주세요"
+            />
+          </div>
+
+          <!-- 3. 연락처 (필수, tel) -->
+          <div class="form-group">
+            <label for="phone" class="form-label">
+              연락처<span class="required-star">*</span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form-input"
+              required
+              placeholder="010-0000-0000"
+            />
+          </div>
+
+          <!-- 4. 대여 물품 선택 (필수, 체크박스 카드 형태) -->
+          <div class="form-group">
+            <div class="selected-count-bar">
+              <label class="form-label" style="margin-bottom: 0;">
+                대여 물품 선택<span class="required-star">*</span>
+              </label>
+              <!-- 실시간 선택 물품 개수 표시 -->
+              <span id="selectedCountDisplay" class="selected-count-badge">
+                선택한 물품: 0개
+              </span>
+            </div>
+
+            <div class="item-cards-grid">
+              <!-- 우산 -->
+              <label class="item-card" for="itemUmbrella">
+                <input
+                  type="checkbox"
+                  id="itemUmbrella"
+                  name="rentalItems"
+                  value="우산"
+                />
+                <span>☂️ 우산</span>
+              </label>
+
+              <!-- 충전기 -->
+              <label class="item-card" for="itemCharger">
+                <input
+                  type="checkbox"
+                  id="itemCharger"
+                  name="rentalItems"
+                  value="충전기"
+                />
+                <span>⚡ 충전기</span>
+              </label>
+
+              <!-- 보조배터리 -->
+              <label class="item-card" for="itemBattery">
+                <input
+                  type="checkbox"
+                  id="itemBattery"
+                  name="rentalItems"
+                  value="보조배터리"
+                />
+                <span>🔋 보조배터리</span>
+              </label>
+
+              <!-- 멀티탭 -->
+              <label class="item-card" for="itemMultiTap">
+                <input
+                  type="checkbox"
+                  id="itemMultiTap"
+                  name="rentalItems"
+                  value="멀티탭"
+                />
+                <span>🔌 멀티탭</span>
+              </label>
+
+              <!-- 가위 -->
+              <label class="item-card" for="itemScissors">
+                <input
+                  type="checkbox"
+                  id="itemScissors"
+                  name="rentalItems"
+                  value="가위"
+                />
+                <span>✂️ 가위</span>
+              </label>
+
+              <!-- 공구 세트 -->
+              <label class="item-card" for="itemToolSet">
+                <input
+                  type="checkbox"
+                  id="itemToolSet"
+                  name="rentalItems"
+                  value="공구 세트"
+                />
+                <span>🔧 공구 세트</span>
+              </label>
+
+              <!-- 기타 -->
+              <label class="item-card" for="itemEtc">
+                <input
+                  type="checkbox"
+                  id="itemEtc"
+                  name="rentalItems"
+                  value="기타"
+                />
+                <span>📦 기타</span>
+              </label>
+            </div>
+
+            <!-- 5. 기타 물품명: '기타'를 선택했을 때만 표시되는 입력칸 -->
+            <div id="customItemContainer" class="custom-item-container hidden">
+              <label for="customItemName" class="form-label">
+                기타 물품명<span class="required-star">*</span>
+              </label>
+              <input
+                type="text"
+                id="customItemName"
+                name="customItemName"
+                class="form-input"
+                placeholder="대여할 물품명을 입력해주세요"
+              />
+            </div>
+          </div>
+
+          <!-- 6. 대여 수량 (number, 최소 1, 최대 5, 기본값 1) -->
+          <div class="form-group">
+            <label for="quantity" class="form-label">
+              대여 수량
+            </label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              class="form-input"
+              min="1"
+              max="5"
+              value="1"
+            />
+            <p class="helper-text">1인당 1회 최대 5개까지 대여 가능합니다.</p>
+          </div>
+
+          <!-- 7. 대여일 & 8. 반납 예정일 (date, 2열 배치) -->
+          <div class="form-group date-row">
+            <div>
+              <label for="rentDate" class="form-label">
+                대여일<span class="required-star">*</span>
+              </label>
+              <input
+                type="date"
+                id="rentDate"
+                name="rentDate"
+                class="form-input"
+                required
+              />
+            </div>
+            <div>
+              <label for="returnDate" class="form-label">
+                반납 예정일<span class="required-star">*</span>
+              </label>
+              <input
+                type="date"
+                id="returnDate"
+                name="returnDate"
+                class="form-input"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- 9. 대여 목적 (textarea) -->
+          <div class="form-group">
+            <label for="purpose" class="form-label">
+              대여 목적
+            </label>
+            <textarea
+              id="purpose"
+              name="purpose"
+              class="form-textarea"
+              placeholder="물품을 어디에 사용할 예정인지 간단하게 작성해주세요."
+            ></textarea>
+          </div>
+
+          <!-- 주의사항 확인 (필수, checkbox 2개) -->
+          <div class="form-group">
+            <span class="form-label">
+              주의사항 확인<span class="required-star">*</span>
+            </span>
+            <div class="notice-checkbox-group">
+              <label class="checkbox-label" for="noticeLoss">
+                <input
+                  type="checkbox"
+                  id="noticeLoss"
+                  name="noticeLoss"
+                  required
+                />
+                <span>대여 물품을 분실 또는 파손하지 않도록 주의하겠습니다.</span>
+              </label>
+              <label class="checkbox-label" for="noticeReturn">
+                <input
+                  type="checkbox"
+                  id="noticeReturn"
+                  name="noticeReturn"
+                  required
+                />
+                <span>반납 예정일까지 물품을 반납하겠습니다.</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 인라인 에러 알림 박스 (브라우저 alert 차단 대비) -->
+          <div id="errorAlertBox" class="error-alert-box hidden" role="alert">
+            <span>⚠️</span>
+            <span id="errorAlertText"></span>
+          </div>
+
+          <!-- 11. 신청하기 버튼 & 12. 다시 작성 버튼 -->
+          <div class="button-group">
+            <button type="submit" id="btnSubmit" class="btn-submit">
+              신청하기
+            </button>
+            <button type="button" id="btnReset" class="btn-reset">
+              다시 작성
+            </button>
+          </div>
+
+          <!-- 엑셀로 저장하기 버튼 추가 -->
+          <div class="excel-button-wrapper">
+            <button type="button" id="btnExportExcel" class="btn-excel">
+              📊 엑셀로 저장하기 (.xlsx)
+            </button>
+          </div>
+        </form>
+
+        <!-- ============================================================== -->
+        <!-- 신청 확인 대화창 모달 (iframe sandbox 호환) -->
+        <!-- ============================================================== -->
+        <div id="confirmModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+          <div class="modal-box">
+            <h3 id="modalTitle" class="modal-title">대여 신청 확인</h3>
+            <p class="modal-message">입력한 내용으로 대여를 신청하시겠습니까?</p>
+            <div class="modal-actions">
+              <button type="button" id="btnModalCancel" class="btn-modal-cancel">취소</button>
+              <button type="button" id="btnModalConfirm" class="btn-modal-confirm">확인</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- 신청 확인 메시지 영역 (연한 초록색 배경, 초록색 글씨, 둥근 모서리) -->
+        <!-- ============================================================== -->
+        <section id="confirmationBox" class="confirmation-box hidden" aria-live="polite">
+          <div id="confirmationContent"></div>
+        </section>
+
+      </main>
+
+      <!-- 하단 안내 문구 -->
+      <footer class="app-footer">
+        <p>공과대학 학생회 과방 물품 대여 관리 센터</p>
+      </footer>
+    </div>
+
+    <!-- 외부 스크립트 분리 (script.js) -->
+    <script type="module" src="/script.js"></script>
+  </body>
+</html>
