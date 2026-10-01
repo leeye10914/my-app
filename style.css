@@ -1,0 +1,518 @@
+/* ==========================================================
+   과방 물품 대여 신청서 스타일시트 (style.css)
+   - 메인 색상: 네이비/블루 (#315B8A)
+   - 배경색: 밝은 회색 (#F5F7FA)
+   - 카드 배경: 흰색 (#FFFFFF)
+   - 폰트: '맑은 고딕', sans-serif
+   ========================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: '맑은 고딕', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background-color: #F5F7FA;
+  color: #2D3748;
+  line-height: 1.6;
+  padding: 24px 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 전체 컨테이너: 최대 너비 600px, 화면 가운데 정렬 */
+.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 전체 신청서 카드 */
+.card {
+  background-color: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+  padding: 36px 28px;
+  border: 1px solid #E2E8F0;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 24px 18px;
+    border-radius: 12px;
+  }
+}
+
+/* 페이지 상단 헤더 영역 */
+.header-section {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.header-icon {
+  font-size: 52px;
+  line-height: 1;
+  margin-bottom: 10px;
+  user-select: none;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #315B8A;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.header-subtitle {
+  font-size: 14px;
+  color: #718096;
+  margin-bottom: 14px;
+}
+
+/* 상단 안내 문구 박스 */
+.notice-box {
+  background-color: #EDF2F7;
+  border-left: 4px solid #315B8A;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #4A5568;
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* 폼 그룹 및 항목 여백 */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #2D3748;
+  margin-bottom: 7px;
+}
+
+/* 필수 항목 빨간색 * 표시 */
+.required-star {
+  color: #E53E3E;
+  margin-left: 2px;
+  font-weight: 700;
+}
+
+/* 입력칸 공통 스타일: 너비 100%, 패딩 10px, 둥근 모서리 8px */
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #CBD5E0;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  font-size: 14px;
+  color: #1A202C;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+/* 포커스 시 파란색 테두리 + 연한 파란색 그림자 */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: #315B8A;
+  box-shadow: 0 0 0 3px rgba(49, 91, 138, 0.18);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* 날짜 2열 그리드 */
+.date-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .date-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* 실시간 선택 개수 표시 바 */
+.selected-count-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.selected-count-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #315B8A;
+  background-color: #EBF3FA;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* 대여 물품 선택: 체크박스 + 물품명 카드 형태 */
+.item-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 480px) {
+  .item-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+.item-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 8px;
+  background-color: #FAFCFE;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #2D3748;
+}
+
+.item-card:hover {
+  background-color: #F0F5FA;
+  border-color: #CBD5E0;
+}
+
+.item-card.checked {
+  border-color: #315B8A;
+  background-color: #F0F6FC;
+  color: #315B8A;
+  font-weight: 600;
+}
+
+.item-card input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #315B8A;
+  cursor: pointer;
+}
+
+/* 기타 물품 입력칸 (애니메이션 노출) */
+.custom-item-container {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #F7FAFC;
+  border: 1px dashed #CBD5E0;
+  border-radius: 8px;
+}
+
+.custom-item-container.hidden {
+  display: none;
+}
+
+/* 수량 안내 텍스트 */
+.helper-text {
+  font-size: 12px;
+  color: #718096;
+  margin-top: 4px;
+}
+
+/* 주의사항 체크박스 영역 */
+.notice-checkbox-group {
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 13px;
+  color: #334155;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1.45;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: #315B8A;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* 버튼 그룹 */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+/* 신청하기 버튼: 파란색 배경(#315B8A), 흰색 글씨, 둥근 모서리 */
+.btn-submit {
+  flex: 2;
+  background-color: #315B8A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.05s ease;
+  font-family: inherit;
+}
+
+.btn-submit:hover {
+  background-color: #3D6FA8;
+}
+
+.btn-submit:active {
+  transform: translateY(1px);
+}
+
+/* 다시 작성 버튼: 흰색 배경, 회색 테두리, 진한 회색 글씨 */
+.btn-reset {
+  flex: 1;
+  background-color: #FFFFFF;
+  color: #4A5568;
+  border: 1px solid #CBD5E0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-reset:hover {
+  background-color: #EDF2F7;
+  border-color: #A0AEC0;
+}
+
+/* 엑셀로 저장하기 버튼 (Excel 그린 컬러) */
+.excel-button-wrapper {
+  margin-top: 12px;
+}
+
+.btn-excel {
+  width: 100%;
+  background-color: #107C41;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition: background-color 0.2s ease, transform 0.05s ease;
+  font-family: inherit;
+}
+
+.btn-excel:hover {
+  background-color: #0E6B37;
+}
+
+.btn-excel:active {
+  transform: translateY(1px);
+}
+
+.btn-excel-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #107C41;
+  background-color: #FFFFFF;
+  border: 1.5px solid #107C41;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-excel-outline:hover {
+  background-color: #F0FBF5;
+}
+
+/* 인라인 에러 알림 박스 */
+.error-alert-box {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+  border: 1px solid #F87171;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.error-alert-box.hidden {
+  display: none;
+}
+
+/* 확인 모달 오버레이 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal-box {
+  background: #FFFFFF;
+  border-radius: 14px;
+  max-width: 400px;
+  width: 100%;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #315B8A;
+  margin-bottom: 8px;
+}
+
+.modal-message {
+  font-size: 14px;
+  color: #4A5568;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-modal-confirm {
+  flex: 1;
+  background-color: #315B8A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-modal-confirm:hover {
+  background-color: #3D6FA8;
+}
+
+.btn-modal-cancel {
+  flex: 1;
+  background-color: #FFFFFF;
+  color: #4A5568;
+  border: 1px solid #CBD5E0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-modal-cancel:hover {
+  background-color: #EDF2F7;
+}
+
+/* 신청 확인 메시지: 연한 초록색 배경, 초록색 글씨, 둥근 모서리 */
+.confirmation-box {
+  margin-top: 24px;
+  background-color: #EBF9F0;
+  color: #198754;
+  border: 1px solid #C3E6CB;
+  border-radius: 8px;
+  padding: 16px 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.confirmation-box.hidden {
+  display: none;
+}
+
+.confirmation-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.confirmation-details {
+  color: #0F5132;
+  font-size: 13.5px;
+}
+
+/* 푸터 텍스트 */
+.app-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #A0AEC0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
